@@ -1,0 +1,11 @@
+{
+  "name": "cra-notes",
+  "version": "1.0.0",
+  "description": "Notes for create-react-app.",
+  "homepage": "https://github.com/afeiship/cra-notes",
+  "author": {
+    "name": "afeiship",
+    "email": "1290657123@qq.com"
+  },
+  "license": "MIT"
+}
