@@ -29,7 +29,7 @@ export default () => {
   return (
     <>
       <ReactKbar actions={actions}>
-        <button>APP</button>
+        <button>Cmd + K active ME 🦄</button>
       </ReactKbar>
       <GlobalStyleComp />
     </>

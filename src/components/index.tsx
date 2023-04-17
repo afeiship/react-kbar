@@ -1,4 +1,3 @@
-import noop from '@jswork/noop';
 import classNames from 'classnames';
 import React, { Component } from 'react';
 import { KBarProvider, KBarPortal, KBarPositioner, KBarAnimator, KBarSearch } from 'kbar';
