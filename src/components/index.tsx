@@ -28,19 +28,17 @@ export default class ReactKbar extends Component<ReactKbarProps> {
     const { className, actions, children, ...props } = this.props;
 
     return (
-      <div data-component={CLASS_NAME} className={classNames(CLASS_NAME, className)} {...props}>
-        <KBarProvider actions={actions}>
-          <KBarPortal>
-            <KBarPositioner>
-              <KBarAnimator className="react-kbar__animator">
-                <KBarSearch className="react-kbar__search" />
-                <Results />
-              </KBarAnimator>
-            </KBarPositioner>
-          </KBarPortal>
-          {children}
-        </KBarProvider>
-      </div>
+      <KBarProvider actions={actions} {...props}>
+        <KBarPortal>
+          <KBarPositioner>
+            <KBarAnimator className="react-kbar__animator">
+              <KBarSearch className="react-kbar__search" />
+              <Results />
+            </KBarAnimator>
+          </KBarPositioner>
+        </KBarPortal>
+        {children}
+      </KBarProvider>
     );
   }
 }
