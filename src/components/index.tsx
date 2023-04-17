@@ -29,7 +29,7 @@ export default class ReactKbar extends Component<ReactKbarProps> {
     return (
       <KBarProvider actions={actions} {...props}>
         <KBarPortal>
-          <KBarPositioner>
+          <KBarPositioner className='react-kbar__positioner'>
             <KBarAnimator className="react-kbar__animator">
               <KBarSearch className="react-kbar__search" />
               <Results />

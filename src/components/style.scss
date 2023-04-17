@@ -1,4 +1,8 @@
 .react-kbar {
+  &__positioner {
+    z-index: 9999;
+  }
+
   &__animator {
     max-width: 600px;
     width: 100%;
