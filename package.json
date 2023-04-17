@@ -1,7 +1,7 @@
 {
   "name": "@jswork/react-kbar",
   "homepage": "https://js.work",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React kbar wrapper.",
   "license": "MIT",
   "main": "dist/index.js",
@@ -76,5 +76,10 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
-  }
+  },
+  "keywords": [
+    "react",
+    "cmd-k",
+    "kbar"
+  ]
 }

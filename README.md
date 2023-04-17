@@ -19,25 +19,50 @@ npm install -S @jswork/react-kbar
   // or use sass
   @import "~@jswork/react-kbar/dist/style.scss";
 
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
   // customize your styles:
   $react-kbar-options: ()
   ```
 2. import js
   ```js
   import React from 'react';
-  import ReactKbar from '@jswork/react-kbar';
-  import styled from 'styled-components';
-
-  const Container = styled.div`
-    width: 80%;
-    margin: 30px auto 0;
+  import ReactKbar from '../../src/main';
+  import { createGlobalStyle } from 'styled-components';
+  // import styled from 'styled-components';
+  const GlobalStyleComp = createGlobalStyle`
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+    }
   `;
 
-  export default (props: any) => {
+  const actions = [
+    {
+      id: 'blog',
+      name: 'Blog',
+      shortcut: ['b'],
+      keywords: 'writing words',
+      perform: () => (window.location.pathname = 'blog')
+    },
+    {
+      id: 'contact',
+      name: 'Contact',
+      shortcut: ['c'],
+      keywords: 'email',
+      perform: () => (window.location.pathname = 'contact')
+    }
+  ];
+
+  export default () => {
     return (
-      <Container>
-        <ReactKbar />
-      </Container>
+      <>
+        <ReactKbar actions={actions}>
+          <button>Cmd + K active ME 🦄</button>
+        </ReactKbar>
+        <GlobalStyleComp />
+      </>
     );
   };
 
