@@ -1,7 +1,8 @@
 import noop from '@jswork/noop';
 import classNames from 'classnames';
 import React, { Component } from 'react';
-
+import { KBarProvider, KBarPortal, KBarPositioner, KBarAnimator, KBarSearch } from 'kbar';
+import Results from './results';
 const CLASS_NAME = 'react-kbar';
 
 export type ReactKbarProps = {
@@ -10,41 +11,36 @@ export type ReactKbarProps = {
    */
   className?: string;
   /**
-   * Default value.
+   * Kbar actions.
    */
-  value?: object;
+  actions?: any[];
   /**
-   * The change handler.
+   * The children.
    */
-  onChange?: Function;
-} & HTMLAttributes<any>;
+  children?: any;
+};
 
 export default class ReactKbar extends Component<ReactKbarProps> {
   static displayName = CLASS_NAME;
   static version = '__VERSION__';
-  static defaultProps = {
-    value: null,
-    onChange: noop
-  };
-
-  handleClick = () => {
-    console.log('click me!');
-  };
+  static defaultProps = {};
 
   render() {
-    const { className, value, onChange, ...props } = this.props;
+    const { className, actions, children, ...props } = this.props;
 
     return (
-      <div
-        data-component={CLASS_NAME}
-        className={classNames(CLASS_NAME, className)}
-        {...props}>
-        <button
-          style={{ padding: 20, width: '100%' }}
-          onClick={this.handleClick}
-          className="icon-play">
-          Enjoy coding.
-        </button>
+      <div data-component={CLASS_NAME} className={classNames(CLASS_NAME, className)} {...props}>
+        <KBarProvider actions={actions}>
+          <KBarPortal>
+            <KBarPositioner>
+              <KBarAnimator className="react-kbar__animator">
+                <KBarSearch className="react-kbar__search" />
+                <Results />
+              </KBarAnimator>
+            </KBarPositioner>
+          </KBarPortal>
+          {children}
+        </KBarProvider>
       </div>
     );
   }

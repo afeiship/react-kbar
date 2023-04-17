@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactKbar from '../../src/main';
+import { createGlobalStyle } from 'styled-components';
 // import styled from 'styled-components';
-import { KBarProvider, KBarPortal, KBarPositioner, KBarAnimator, KBarSearch } from 'kbar';
-import Results, { animatorStyle, searchStyle } from './hot-result';
+const GlobalStyleComp = createGlobalStyle`
+  body{
+    font-family: Arial, Helvetica, sans-serif;
+  }
+`;
 
 const actions = [
   {
@@ -23,16 +27,11 @@ const actions = [
 
 export default () => {
   return (
-    <KBarProvider actions={actions}>
-      <KBarPortal>
-        <KBarPositioner>
-          <KBarAnimator style={animatorStyle}>
-            <KBarSearch style={searchStyle} />
-            <Results />
-          </KBarAnimator>
-        </KBarPositioner>
-      </KBarPortal>
-      <ReactKbar />
-    </KBarProvider>
+    <>
+      <ReactKbar actions={actions}>
+        <button>APP</button>
+      </ReactKbar>
+      <GlobalStyleComp />
+    </>
   );
 };

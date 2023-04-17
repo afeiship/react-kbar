@@ -19,6 +19,10 @@ npm install -S @jswork/react-kbar
   // or use sass
   @import "~@jswork/react-kbar/dist/style.scss";
 
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
   // customize your styles:
   $react-kbar-options: ()
   ```

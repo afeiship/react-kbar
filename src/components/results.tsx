@@ -1,50 +1,6 @@
 import React from 'react';
 import { KBarResults, ActionId, ActionImpl, useMatches } from 'kbar';
-
-export const searchStyle = {
-  padding: '12px 16px',
-  fontSize: '16px',
-  width: '100%',
-  boxSizing: 'border-box' as React.CSSProperties['boxSizing'],
-  outline: 'none',
-  border: 'none',
-  background: 'var(--background)',
-  color: 'var(--foreground)'
-};
-
-export const animatorStyle = {
-  maxWidth: '600px',
-  width: '100%',
-  background: 'var(--background)',
-  color: 'var(--foreground)',
-  borderRadius: '8px',
-  overflow: 'hidden',
-  boxShadow: 'var(--shadow)'
-};
-
-const groupNameStyle = {
-  padding: '8px 16px',
-  fontSize: '10px',
-  textTransform: 'uppercase' as const,
-  opacity: 0.5
-};
-
-function RenderResults() {
-  const { results, rootActionId } = useMatches();
-
-  return (
-    <KBarResults
-      items={results}
-      onRender={({ item, active }) =>
-        typeof item === 'string' ? (
-          <div style={groupNameStyle}>{item}</div>
-        ) : (
-          <ResultItem action={item} active={active} currentRootActionId={rootActionId as string} />
-        )
-      }
-    />
-  );
-}
+import cx from 'classnames';
 
 const ResultItem = React.forwardRef(
   (
@@ -71,27 +27,10 @@ const ResultItem = React.forwardRef(
     //opacity: 0;
     // transform: scale(0.99); max-width: 600px; width: 100%; background: var(--background); color: var(--foreground); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); pointer-events: auto;
     return (
-      <div
-        ref={ref}
-        className="is-hot-results"
-        style={{
-          padding: '12px 16px',
-          background: active ? 'var(--a1)' : 'transparent',
-          borderLeft: `5px solid ${active ? 'var(--foreground)' : 'transparent'}`,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          cursor: 'pointer'
-        }}>
-        <div
-          style={{
-            display: 'flex',
-            gap: '8px',
-            alignItems: 'center',
-            fontSize: 14
-          }}>
+      <div ref={ref} className={cx('react-kbar__hot-results', { active })}>
+        <div>
           {action.icon && action.icon}
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div>
             <div>
               {ancestors.length > 0 &&
                 ancestors.map((ancestor) => (
@@ -117,16 +56,9 @@ const ResultItem = React.forwardRef(
           </div>
         </div>
         {action.shortcut?.length ? (
-          <div aria-hidden style={{ display: 'grid', gridAutoFlow: 'column', gap: '4px' }}>
+          <div aria-hidden className="react-kbar__shortcut">
             {action.shortcut.map((sc) => (
-              <kbd
-                key={sc}
-                style={{
-                  padding: '4px 6px',
-                  background: 'rgba(0 0 0 / .1)',
-                  borderRadius: '4px',
-                  fontSize: 14
-                }}>
+              <kbd className="react-kbar__kbd" key={sc}>
                 {sc}
               </kbd>
             ))}
@@ -137,4 +69,17 @@ const ResultItem = React.forwardRef(
   }
 );
 
-export default RenderResults;
+export default function Results() {
+  const { results, rootActionId } = useMatches();
+  return (
+    <KBarResults
+      items={results}
+      onRender={({ item, active }) => {
+        if (typeof item === 'string') return <div className="react-kbar__group-name">{item}</div>;
+        return (
+          <ResultItem action={item} active={active} currentRootActionId={rootActionId as string} />
+        );
+      }}
+    />
+  );
+}
