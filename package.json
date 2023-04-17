@@ -1,7 +1,7 @@
 {
   "name": "@jswork/react-kbar",
   "homepage": "https://js.work",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React kbar wrapper.",
   "license": "MIT",
   "main": "dist/index.js",
